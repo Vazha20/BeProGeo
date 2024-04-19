@@ -3,28 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="./src/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
 </head>
 <body>
     <div class="container">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#"><img width="60px" src="./logo.jpg"></a>
+                <a class="navbar-brand" href="./index.html"><img width="60px" src="./logo.jpg"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link  " href="#">Home</a>
+                            <a class="nav-link  " href="#">Owner</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" href="#">Players</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link">Disabled</a>
+                            <a class="nav-link">Photo&Video</a>
                         </li>
+                        <li class="nav-item">
+                          <a class="nav-link">Football Camps For Players</a>
+                      </li>
                     </ul>
                     <div>
                         <button type="button" class="btn btn-outline-warning">Contact US</button>
@@ -53,14 +57,44 @@
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+          <span class="carousel-control-prev-icon" arirow
+          <span class="visually-hidden">Prev width="100px"ious</span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
       </div>
+
+      <section>
+        <div class="container">
+          <h3 class="mt-5">Players</h3>
+          <div class="d-flex flex-wrap mt-5 justify-content-between">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+          </div>
+          <div class="d-flex justify-content-end">
+            <div class="mt-5 btn-primary">More...</div>
+          </div>
+        </div>
+      </section>
+      
+      <section>
+        <div class="container">
+          <h3 class="mt-5">Photo&Video</h3>
+          <div class="d-flex flex-wrap mt-5 justify-content-between">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+            <img width="300px" src="./18942381.jpg">
+          </div>
+          <div class="d-flex justify-content-end">
+          <div class="mt-5 btn-primary">More...</div>
+        </div>
+        </div>
+      </section>
 
       <div class="container mt-5">
         <div class="d-flex align-items-start">
@@ -70,13 +104,13 @@
           </div>
     
           <div class="d-flex col-5 gap-3">
-            <input type="email" placeholder="ელ.ფოსტა" id="loginName" class="form-control" />
-            <button type="button" class="btn-secendory">გამოწერა</button>
+            <input type="email" placeholder="Enter Email to subscribe" id="loginName" class="form-control" />
+            <button type="button" class="btn-primary">Subscribe</button>
           </div>
         </div>
       </div>
 
-      <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
+      <footer class="text-center text-lg-start text-white mt-5" style="background-color: #1c2331">
 
         <section style="background-color: rgba(0, 0, 0, 0.2);" class="d-flex justify-content-center justify-content-lg-center p-4 ">
         
@@ -100,46 +134,44 @@
               
               <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4" >
                 <div class="desktop-only text-decoration">
-                <a class="d-flex text-white" href="./index.html"><p class="blueCircle">H</p>
-                <p class="fontforName">DC</p></a>
+                <a class="d-flex align-items-center text-white" href="./index.html"><p class="CircleColor">Be</p>
+                <p class="fontforName ">ProGeo</p></a>
               </div>
               <div class="response-only text-decoration">
-                <a class="d-flex justify-content-center text-white" href="./index.html"><p class="blueCircle">H</p>
-                <p class="fontforName">DC</p></a>
+                <a class="d-flex justify-content-center text-white" href="./index.html"><p class="blueCircle"></p>
+                <p class="fontforName"></p></a>
               </div>
-                <div>
-                <h6 class="text-uppercase fw-bold">ჯანმეთელობისა და განვითარების ცენტრი</h6>
-              </div>
+               
               </div>
               <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4">
-                  პროდუქტები
+                <h6 class="fw-bold mb-4">
+                  Menu
                 </h6>
                 <p>
-                  <a href="#!" class="text-reset">ჩვენ შესახებ</a>
+                  <a href="#!" class="text-reset">Owner</a>
                 </p>
                 <p>
-                  <a href="#!" class="text-reset">პერსონალი</a>
+                  <a href="#!" class="text-reset">Players</a>
                 </p>
                 <p>
-                  <a href="#!" class="text-reset">რჩევა</a>
+                  <a href="#!" class="text-reset">Photo&Video</a>
                 </p>
                
               </div>
              
               <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                 <!-- Links -->
-                <h6 class="text-uppercase fw-bold mb-4">კონტაქტი</h6>
-                <p><img width="25px" src="./src/img/icons8-address-30.png">  ალექსანდე ყაზბეგის ქუჩა #13</p>
-                <p><img width="25px" src="./src/img/icons8-email-send-30.png">&nbsp;info@example.com</p>
-                <p><img width="25px" src="./src/img/icons8-phone-30.png"> + 01 234 567 88</p>
+                <h6 class="fw-bold mb-4">Contact</h6>
+                <p>Email: BeProGeo@gmail.com</p>
+                <p></p>
+                <p></p>
                 
               </div>
           </div>
         </section>
         <div class="text-center padding-text" style="background-color: rgba(0, 0, 0, 0.2)">
-         <p>© ჯანმეთელობისა და განვითარების ცენტრი ყველა უფლება დაცულია</p>
+         <p>© BeProGeo</p>
         </div>  
       </footer>
     
