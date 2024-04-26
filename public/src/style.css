@@ -2,7 +2,6 @@
     padding: 20px 0px 8px 0px;
 }
 .CircleColor{
-    
     width: 50px;
     height: 50px;
     font-size: xx-large;
@@ -22,16 +21,31 @@
     background-color: #ffc400;
     color: white;
     border-style: none;
-    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: bold;
 }
-.btn-more{
+.btn-secondery{
+    padding: 12px;
     border-radius: 30px;
     background-color: #ffc400;
-    width: 100px;
-    justify-content: end;
-    display: flex;
+    color: white;
+    border-style: none;
+    font-family:'Times New Roman', Times, serif;
+    font-weight: bold;
 }
+li a{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.text{
+    
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+}
+
+.owner {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 .response-only {
     display: none;
 }
@@ -39,13 +53,34 @@
 .desktop-only {
     display: block;
 }
+.response-onlyphotos{
+    display: none;
+}
 
-@media only screen and (max-width: 993px) {
+@media only screen and (max-width: 992px) {
     .desktop-only {
         display: none;
     }
-
+    
     .response-only {
         display: block;
     }
+   
+        .carousel-item img {
+          height: 400px;
+        }
 }
+@media only screen and (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+    
+    .response-onlyphotos {
+        display: block;
+    }
+   
+        
+}
+
+
+
