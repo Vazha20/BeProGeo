@@ -32,3 +32,20 @@
     justify-content: end;
     display: flex;
 }
+.response-only {
+    display: none;
+}
+
+.desktop-only {
+    display: block;
+}
+
+@media only screen and (max-width: 993px) {
+    .desktop-only {
+        display: none;
+    }
+
+    .response-only {
+        display: block;
+    }
+}
