@@ -49,17 +49,39 @@
 </div>
 
 
+<section>
+      <div class="container">
+        <h3 class="mt-5">Photo&Video</h3>
+        <div id="newsContainer" class="d-flex flex-wrap justify-content-center gap-3">
+       
+  
+        </div>
+        
+     
+    </div>
+  </section>
+  
 
-<div id="newsContainer" class="container d-flex flex-wrap justify-content-between mt-5" style="display: none;">
-  <!-- News will be dynamically added here -->
-</div>
+    
+  
 
-<form id="newsForm" class="container">
-  <input type="text" id="title" placeholder="სათაური"><br>
-  <textarea class="textArea" id="text" width="500px" placeholder="ტექსტი"></textarea><br>
-  <input type="file" id="image"><br>
-  <button class="btn-secendory" type="submit">დამატება</button>
-</form>
+  <form id="newsForm">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br><br>
+    
+    <label for="text">Text:</label>
+    <textarea id="text" name="text"></textarea><br><br>
+    
+    <label for="file">Upload Local File:</label>
+    <input type="file" id="file" name="file"><br><br>
+
+    <label for="youtubeLink">YouTube Link:</label>
+    <input type="text" id="youtubeLink" name="youtubeLink"><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+
 
    
       <footer class="text-center text-lg-start text-white mt-5" style="background-color: #1c2331">
