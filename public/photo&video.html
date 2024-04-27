@@ -48,6 +48,19 @@
     </nav>
 </div>
 
+
+
+<div id="newsContainer" class="container d-flex flex-wrap justify-content-between mt-5" style="display: none;">
+  <!-- News will be dynamically added here -->
+</div>
+
+<form id="newsForm" class="container">
+  <input type="text" id="title" placeholder="სათაური"><br>
+  <textarea class="textArea" id="text" width="500px" placeholder="ტექსტი"></textarea><br>
+  <input type="file" id="image"><br>
+  <button class="btn-secendory" type="submit">დამატება</button>
+</form>
+
    
       <footer class="text-center text-lg-start text-white mt-5" style="background-color: #1c2331">
 
@@ -113,7 +126,7 @@
          <p>©BeProGeo</p>
         </div>  
       </footer>
-    <script src="./script.js"></script>
+    <script type="module" src="./photovideo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
