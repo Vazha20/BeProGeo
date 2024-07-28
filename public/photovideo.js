@@ -5,13 +5,13 @@ import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase
 
     // Firebase project configuration
     const firebaseConfig = {
-      apiKey: "AIzaSyCCDn0Oj8SytX73MswfKi8a1TIeGvV8WjQ",
-      authDomain: "beprogeo11.firebaseapp.com",
-      projectId: "beprogeo11",
-      storageBucket: "beprogeo11.appspot.com",
-      messagingSenderId: "1071708965216",
-      appId: "1:1071708965216:web:47a2b020ecc2d61738f605",
-      measurementId: "G-3NWKF44BZ0"
+      apiKey: "AIzaSyCVT2eUn2A3YDsFR3IFzQ4AxinF3YgW9o8",
+      authDomain: "beprogeo000.firebaseapp.com",
+      projectId: "beprogeo000",
+      storageBucket: "beprogeo000.appspot.com",
+      messagingSenderId: "295763562853",
+      appId: "1:295763562853:web:0e3d102badce7e4ad9518c",
+      measurementId: "G-6EPR2PT6FK"
     };
     
     const firebaseApp = initializeApp(firebaseConfig);
