@@ -4,15 +4,15 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstati
 
 // Firebase project configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyCCx0pKzt3VsZucnm6aVvqNoKiypo7JHhs",
-    authDomain: "beprogeo-4d59a.firebaseapp.com",
-    databaseURL: "https://beprogeo-4d59a-default-rtdb.europe-west1.firebasedatabase.app",
-    projectId: "beprogeo-4d59a",
-    storageBucket: "beprogeo-4d59a.appspot.com",
-    messagingSenderId: "1099323304654",
-    appId: "1:1099323304654:web:f257908db4e0585fc4fe9f",
-    measurementId: "G-8TLZTTLN5E"
+    apiKey: "AIzaSyCCDn0Oj8SytX73MswfKi8a1TIeGvV8WjQ",
+    authDomain: "beprogeo11.firebaseapp.com",
+    projectId: "beprogeo11",
+    storageBucket: "beprogeo11.appspot.com",
+    messagingSenderId: "1071708965216",
+    appId: "1:1071708965216:web:47a2b020ecc2d61738f605",
+    measurementId: "G-3NWKF44BZ0"
   };
+  
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 const storage = getStorage(firebaseApp);
