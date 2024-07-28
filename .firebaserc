@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "beprogeo000"
-  }
+    "default": "beprogeo00",
+    "beprogeo00": "beprogeo00"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
