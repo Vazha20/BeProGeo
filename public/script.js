@@ -4,13 +4,13 @@ import { getFirestore, collection, getDocs, orderBy, query } from 'https://www.g
 import { getStorage } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyCVT2eUn2A3YDsFR3IFzQ4AxinF3YgW9o8",
-    authDomain: "beprogeo000.firebaseapp.com",
-    projectId: "beprogeo000",
-    storageBucket: "beprogeo000.appspot.com",
-    messagingSenderId: "295763562853",
-    appId: "1:295763562853:web:0e3d102badce7e4ad9518c",
-    measurementId: "G-6EPR2PT6FK"
+    apiKey: "AIzaSyD3Y5hZ7STv-ku8swbiIal2BbiVg2NL9Mo",
+    authDomain: "beprogeo0000.firebaseapp.com",
+    projectId: "beprogeo0000",
+    storageBucket: "beprogeo0000.appspot.com",
+    messagingSenderId: "1035485616827",
+    appId: "1:1035485616827:web:120ab8f45ef1da7e97a79e",
+    measurementId: "G-J87E24LTGG"
   };
   
 const firebaseApp = initializeApp(firebaseConfig);
