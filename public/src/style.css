@@ -106,3 +106,93 @@ li a{
     padding: 40px 40px 40px 40px;
 }
 
+.borderColor{
+    width: 264px;
+    height: 480px; /* Width of the photo box */
+    overflow: hidden; /* Hide any overflow */
+    border: 2px solid #ffc400; /* Optional border for visualization */
+    position: relative;
+    background-color: gainsboro;
+}
+
+.edit-btn {
+    position: absolute; /* Position the button absolutely within the card */
+    top: 10px; /* Distance from the top edge */
+    right: 10px; /* Distance from the right edge */
+    background: none; /* Remove default background */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Show pointer cursor on hover */
+    z-index: 10; /* Ensure the button is above other content */
+}
+
+.edit-btn img {
+    display: block; /* Ensure the image is not affected by any inline styles */
+}
+#playerContainer {
+    position: relative;
+    z-index: 1; /* Lower than the edit form */
+}
+#photoContainer {
+    position: relative;
+    z-index: 1; /* Lower than the edit form */
+}
+
+
+/* Style for the edit form container */
+#editFormContainer {
+    position: fixed; /* Makes the edit form appear fixed relative to the viewport */
+    top: 50%; /* Center vertically (optional) */
+    left: 50%; /* Center horizontally (optional) */
+    transform: translate(-50%, -50%); /* Center the container */
+    z-index: 10; /* Higher than the playerContainer */
+    background-color: white; /* Ensure it stands out */
+    padding: 20px; /* Add some padding for aesthetics */
+    border: 1px solid #ccc; /* Optional border */
+    box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Optional shadow for better visibility */
+    display: none; /* Initially hidden */
+    width: 264px;
+    height: 350px;
+}
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    color: yellow; /* Change color on hover (optional) */
+}
+.titleBtn{
+    width: 150px;
+    padding: 20px;
+    border-radius: 30px;
+    background-color: #ffc400;
+    color: white;
+    border-style: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+}
+p {
+    color: black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;    
+}
+h4{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 50px;
+    
+}
+.line-yellow{
+    
+    border:2px solid #ffc400;
+
+}
+
+p a{
+    color: white;
+}
