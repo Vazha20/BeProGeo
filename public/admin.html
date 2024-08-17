@@ -77,8 +77,8 @@
     <textarea class="form-control" type="text" id="textVideo" ></textarea>
 </div>
 <div>
-    <label for="youtubeLink">YouTube Video Link:</label>
-    <input type="text" id="youtubeLink">   
+    <label for="youtubeLink">YouTube Video Link</label><br>
+    <input class="form-control" type="text" id="youtubeLink">   
 </div>
 <p>OR</p>
 <div class="mt-2">
@@ -89,6 +89,26 @@
 </form>
 </div>
 
+<div class="container mt-5">
+    <h2 class="text-center">Add Football Camp</h2>
+<form id="campForm">
+    <label for="name">Camp Name</label><br>
+    <input class="form-control" type="text" id="name" name="name" required>
+  
+    <label for="date">Date</label><br>
+    <input class="form-control" type="date" id="date" name="date" required>
+  
+    <label for="location">Location</label><br>
+    <input class="form-control" type="text" id="location" name="location" required>
+  
+    <label for="description">Description:</label><br>
+    <textarea class="form-control" id="description" name="description" required></textarea><br>
+    <label for="image">Image:</label>
+    <input type="file" id="imageCamp" name="imageCamp" accept="image/*" required><br>
+    <button class="mt-2 btn-primary text-black" type="submit">Add Camp</button>
+  </form>
+  </div>
+
 
 
 
@@ -97,6 +117,7 @@
 <script type="module" src="./photo.js"></script>
 <script type="module" src="./video.js"></script>
 <script type="module" src="./players.js"></script>
+<script type="module" src="./footcamps.js"></script>
 <script type="module" src="./admin.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
