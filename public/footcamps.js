@@ -30,7 +30,7 @@ onAuthStateChanged(auth, (user) => {
 document.getElementById('campForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const name = document.getElementById('name').value;
+    const nameCamp = document.getElementById('nameCamp').value;
     const date = document.getElementById('date').value;
     const location = document.getElementById('location').value;
     const description = document.getElementById('description').value;
@@ -45,7 +45,7 @@ document.getElementById('campForm').addEventListener('submit', async (event) => 
 
             // Add document to Firestore
             await addDoc(collection(db, 'football_camps'), {
-                name: name,
+                nameCamp: nameCamp,
                 date: date,
                 location: location,
                 description: description,
@@ -77,8 +77,8 @@ async function displayCamps() {
     try {
         const campsCollection = collection(db, 'football_camps');
         // Get the camps sorted by 'createdAt' in descending order
-        const q = query(campsCollection, orderBy('createdAt', 'desc'));
-        const campsSnapshot = await getDocs(q);
+        const FootballCamps = query(campsCollection, orderBy('createdAt', 'desc'));
+        const campsSnapshot = await getDocs(FootballCamps);
 
         if (campsSnapshot.empty) {
             console.log('No football camps found.');
@@ -105,15 +105,35 @@ function createCampCard(campData, id) {
     }
 
     campCard.innerHTML = `
-        <div class="mt-3 borderColor">
-        <img width="264px" src="${campData.imageURL}" alt="${campData.name}">
-            <h4 class="p-1">${campData.name}</h4>
-            
-            <p class="p-1"><strong>Date:</strong> ${campData.date}</p>
+ <section class="desktop-only">
+    <div class="mt-5 gap-3 d-flex">
+        <div>
+            <img width="500px" height="400px" src="${campData.imageURL}" alt="${campData.nameCamp}">
+        </div>
+        <div>
+            <h3>${campData.nameCamp}</h3>
+            <div class="d-flex">
+            <p><img width="30px" src="./src/img/icons8-date-48.png"> ${campData.date}</p>
+            <p><img width="30px" src="./src/img/icons8-date-48.png">  ${campData.location}</p>
+            </div>
+            <p> ${campData.description}</p>
+            ${editButton}
+        </div>
+    </div>
+</section>
+        <section class="response-only">
+        <div class="d-flex flex-wrap justify-content-center mt-3">
+        <div>
+            <img width="264px" height="264px" src="${campData.imageURL}" alt="${campData.nameCamp}">
+            <h3>${campData.nameCamp}</h3>
+            <p class="p-1"><strong><img src="./src/img/icons8-date-48.png"></strong> ${campData.date}</p>
             <p class="p-1"><strong>Location:</strong> ${campData.location}</p>
             <p class="p-1"><strong>Description:</strong> ${campData.description}</p>
             ${editButton}
-        </div>
+        </div> 
+        </div> 
+        </section>  
+        
     `;
 
     return campCard;
