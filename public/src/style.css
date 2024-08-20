@@ -151,7 +151,7 @@ li a{
     box-shadow: 0 0 10px rgba(0,0,0,0.2); /* Optional shadow for better visibility */
     display: none; /* Initially hidden */
     width: 264px;
-    height: 360px;
+    height: 400px;
 }
 .close-btn {
     position: absolute;
@@ -195,4 +195,8 @@ h4{
 
 p a{
     color: white;
+}
+.posRelative{
+    position: relative;
+       overflow: hidden;
 }

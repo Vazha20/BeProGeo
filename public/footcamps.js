@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
 
@@ -26,7 +26,7 @@ onAuthStateChanged(auth, (user) => {
     currentUser = user || null;
 });
 
-// Handle form submission
+// Handle form submission for new camp
 document.getElementById('campForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -53,7 +53,6 @@ document.getElementById('campForm').addEventListener('submit', async (event) => 
                 createdAt: new Date()
             });
 
-            
             campForm.reset();
             displayPopup('Football Camp added successfully!', true);
 
@@ -68,7 +67,6 @@ document.getElementById('campForm').addEventListener('submit', async (event) => 
     }
 });
 
-
 // Function to display football camps
 async function displayCamps() {
     const campsList = document.getElementById('campsList');
@@ -76,7 +74,6 @@ async function displayCamps() {
 
     try {
         const campsCollection = collection(db, 'football_camps');
-        // Get the camps sorted by 'createdAt' in descending order
         const FootballCamps = query(campsCollection, orderBy('createdAt', 'desc'));
         const campsSnapshot = await getDocs(FootballCamps);
 
@@ -100,48 +97,132 @@ function createCampCard(campData, id) {
     campCard.classList.add('camp-card');
 
     let editButton = '';
+    let editButtonTwo = '';
+
     if (currentUser) {
-        editButton = `<div class="edit-btn" data-id="${id}"><img width="50px" src="./src/img/edit-button.png" alt="Edit"></div>`;
+        // Unique IDs for each edit button
+        editButton = `<div class="edit-btn" data-id="${id}" id="edit-btn-${id}"><img width="50px" src="./src/img/edit-button.png" alt="Edit"></div>`;
+        editButtonTwo = `<div class="edit-btn" data-id="${id}" id="edit-btn-two-${id}"><img width="50px" src="./src/img/edit-button.png" alt="Edit"></div>`;
     }
 
     campCard.innerHTML = `
- <section class="desktop-only">
-    <div class="mt-5 gap-3 d-flex">
-        <div>
-            <img width="500px" height="400px" src="${campData.imageURL}" alt="${campData.nameCamp}">
-        </div>
-        <div>
-            <h3>${campData.nameCamp}</h3>
-            <div class="d-flex">
-            <p><img width="30px" src="./src/img/icons8-date-48.png"> ${campData.date}</p>
-            <p><img width="30px" src="./src/img/icons8-date-48.png">  ${campData.location}</p>
+        <section class="desktop-only">
+            <div class="mt-5 gap-5 d-flex posRelative">
+                <div>
+                    <img width="500px" height="400px" src="${campData.imageURL}" alt="${campData.nameCamp}">
+                </div>
+                <div>
+                    <h3>${campData.nameCamp}</h3>
+                    <div class="d-flex align-items-center">
+                        <p><img width="30px" src="./src/img/icons8-date-48.png"> ${campData.date}</p>
+                        <p><img width="40px" src="./src/img/location.png">${campData.location}</p>
+                    </div>
+                    <p>${campData.description}</p>
+                </div>
+                ${editButton}
             </div>
-            <p> ${campData.description}</p>
-            ${editButton}
-        </div>
-    </div>
-</section>
-        <section class="response-only">
-        <div class="d-flex flex-wrap justify-content-center mt-3">
-        <div>
-            <img width="264px" height="264px" src="${campData.imageURL}" alt="${campData.nameCamp}">
-            <h3>${campData.nameCamp}</h3>
-            <p class="p-1"><strong><img src="./src/img/icons8-date-48.png"></strong> ${campData.date}</p>
-            <p class="p-1"><strong>Location:</strong> ${campData.location}</p>
-            <p class="p-1"><strong>Description:</strong> ${campData.description}</p>
-            ${editButton}
-        </div> 
-        </div> 
-        </section>  
-        
+        </section>
+        <section class="response-only posRelative">
+            <div class="text-center mt-3">
+                <div>
+                    <img width="264px" height="264px" src="${campData.imageURL}" alt="${campData.nameCamp}">
+                    ${editButtonTwo}
+                </div>
+                <h3 class="mt-3">${campData.nameCamp}</h3>
+                <div class="d-flex align-items-center justify-content-center">
+                    <p><img width="30px" src="./src/img/icons8-date-48.png"> ${campData.date}</p>
+                    <p><img width="40px" src="./src/img/location.png">${campData.location}</p>
+                </div>
+                <div class="justify-content-center d-flex">
+                    <p class="col-10">${campData.description}</p>
+                </div>
+            </div>
+        </section>
     `;
+
+    // Attach event listener to the first edit button
+    if (currentUser) {
+        const editBtn = campCard.querySelector('#edit-btn-' + id);
+        if (editBtn) {
+            editBtn.addEventListener('click', () => {
+                showEditForm(campData, id);
+            });
+        }
+
+        // Attach event listener to the second edit button
+        const editBtnTwo = campCard.querySelector('#edit-btn-two-' + id);
+        if (editBtnTwo) {
+            editBtnTwo.addEventListener('click', () => {
+                showEditForm(campData, id);
+            });
+        }
+    }
 
     return campCard;
 }
 
-// Display camps on page load
-document.addEventListener('DOMContentLoaded', displayCamps);
+// Show edit form with existing data
+function showEditForm(campData, id) {
+    document.getElementById('editCampId').value = id;
+    document.getElementById('editName').value = campData.nameCamp;
+    document.getElementById('editDate').value = campData.date;
+    document.getElementById('editLocation').value = campData.location;
+    document.getElementById('editDescription').value = campData.description;
 
+    // Show the edit form container
+    document.getElementById('editFormContainer').style.display = 'block';
+}
+
+// Handle form submission for editing
+document.getElementById('editCampForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const id = document.getElementById('editCampId').value;
+    const nameCamp = document.getElementById('editName').value;
+    const date = document.getElementById('editDate').value;
+    const location = document.getElementById('editLocation').value;
+    const description = document.getElementById('editDescription').value;
+    const imageFile = document.getElementById('editImage').files[0];
+
+    try {
+        let imageURL = null;
+        if (imageFile) {
+            const imageRef = ref(storage, `images/${imageFile.name}`);
+            await uploadBytes(imageRef, imageFile);
+            imageURL = await getDownloadURL(imageRef);
+        }
+
+        const campRef = doc(db, 'football_camps', id);
+        await updateDoc(campRef, {
+            nameCamp: nameCamp,
+            date: date,
+            location: location,
+            description: description,
+            ...(imageURL && { imageURL: imageURL })
+        });
+
+        document.getElementById('editCampForm').reset();
+        document.getElementById('editFormContainer').style.display = 'none';
+        displayPopup('Football Camp updated successfully!', true);
+
+        // Reload the entire page after a short delay
+        setTimeout(() => {
+            window.location.reload(); // Full page reload
+        }, 1000); // 1 second
+
+    } catch (error) {
+        console.error("Error updating football camp", error);
+        displayPopup('Error updating football camp. Please try again later.', false);
+    }
+});
+
+// Close edit form
+document.getElementById('closeEditFormBtn').addEventListener('click', () => {
+    document.getElementById('editCampForm').reset();
+    document.getElementById('editFormContainer').style.display = 'none';
+});
+
+// Display popup message
 function displayPopup(message, isSuccess) {
     const popup = document.createElement('div');
     popup.classList.add('popup');
@@ -155,18 +236,20 @@ function displayPopup(message, isSuccess) {
     }, 2000);
 }
 
-function loadPhoto() {
+// Display camps on page load
+document.addEventListener('DOMContentLoaded', displayCamps);
+
+function loadCamps() {
     setTimeout(function () {
-        const photoContainer = document.getElementById("photoContainer");
+        const campsList = document.getElementById("campsList");
         const loadingIcon = document.getElementById("loadingIcon");
         if (loadingIcon) {
             loadingIcon.style.display = "none";
         }
-        photoContainer.style.display = "block";
-    }, 1000); 
+        campsList.style.display = "block";
+    }, 1000);
 }
 
 window.onload = function () {
-    loadPhoto();
+    loadCamps();
 };
-

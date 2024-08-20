@@ -77,11 +77,11 @@
 </section>
 
 <div id="editFormContainer">
-  <h2>Edit Football Camp</h2>
+  <button id="closeEditFormBtn" class="close-btn">×</button> <br>
   <form id="editCampForm">
       <input type="hidden" id="editCampId">
 
-      <label for="editName">Name:</label>
+      <label for="editName">Camp Name:</label>
       <input type="text" id="editName" required>
 
       <label for="editDate">Date:</label>
@@ -91,13 +91,13 @@
       <input type="text" id="editLocation" required>
 
       <label for="editDescription">Description:</label>
-      <textarea id="editDescription" rows="4" required></textarea>
+      <textarea id="editDescription" rows="4" required></textarea><br>
 
       <label for="editImage">Image:</label>
       <input type="file" id="editImage" accept="image/*">
 
       <button type="submit">Update Camp</button>
-      <button type="button" id="closeEditFormBtn">Close</button>
+      
   </form>
 </div>
 
@@ -159,6 +159,7 @@
           <!-- Links -->
           <h6 class="fw-bold mb-4 text">Contact</h6>
           <p class="text-white">Email: <a class="text">bbeprogeo@gmail.com</a></p>
+          <p class="text-white">WhatsApp: <a class="text">+421907261102</a></p>
           <p></p>
           <p></p>
           
