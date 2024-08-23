@@ -1,7 +1,7 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, doc, updateDoc, deleteDoc, getDoc } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
 
 // Firebase project configuration
 const firebaseConfig = {
@@ -98,11 +98,15 @@ function createCampCard(campData, id) {
 
     let editButton = '';
     let editButtonTwo = '';
+    let deleteButton = '';
+    let deleteButtonTwo = '';
 
     if (currentUser) {
-        // Unique IDs for each edit button
+        // Unique IDs for each edit and delete button
         editButton = `<div class="edit-btn" data-id="${id}" id="edit-btn-${id}"><img width="50px" src="./src/img/edit-button.png" alt="Edit"></div>`;
         editButtonTwo = `<div class="edit-btn" data-id="${id}" id="edit-btn-two-${id}"><img width="50px" src="./src/img/edit-button.png" alt="Edit"></div>`;
+        deleteButton = `<div class="delete-btn" data-id="${id}" id="delete-btn-${id}"><img width="50px" src="./src/img/delete.png"></div>`;
+        deleteButtonTwo = `<div class="delete-btn" data-id="${id}" id="delete-btn-two-${id}"><img width="50px" src="./src/img/delete.png"></div>`;  
     }
 
     campCard.innerHTML = `
@@ -120,6 +124,7 @@ function createCampCard(campData, id) {
                     <p>${campData.description}</p>
                 </div>
                 ${editButton}
+                ${deleteButton}
             </div>
         </section>
         <section class="response-only posRelative">
@@ -127,6 +132,7 @@ function createCampCard(campData, id) {
                 <div>
                     <img width="264px" height="264px" src="${campData.imageURL}" alt="${campData.nameCamp}">
                     ${editButtonTwo}
+                    ${deleteButtonTwo}
                 </div>
                 <h3 class="mt-3">${campData.nameCamp}</h3>
                 <div class="d-flex align-items-center justify-content-center">
@@ -154,6 +160,22 @@ function createCampCard(campData, id) {
         if (editBtnTwo) {
             editBtnTwo.addEventListener('click', () => {
                 showEditForm(campData, id);
+            });
+        }
+
+        // Attach event listener to the delete button
+        const deleteBtn = campCard.querySelector('#delete-btn-' + id);
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                deleteCamp(id);
+            });
+        }
+
+        // Attach event listener to the second delete button
+        const deleteBtnTwo = campCard.querySelector('#delete-btn-two-' + id);
+        if (deleteBtnTwo) {
+            deleteBtnTwo.addEventListener('click', () => {
+                deleteCamp(id);
             });
         }
     }
@@ -221,6 +243,35 @@ document.getElementById('closeEditFormBtn').addEventListener('click', () => {
     document.getElementById('editCampForm').reset();
     document.getElementById('editFormContainer').style.display = 'none';
 });
+
+// Delete camp function
+async function deleteCamp(id) {
+    const confirmation = confirm('Are you sure you want to delete this camp?');
+    if (!confirmation) return;
+
+    try {
+        // Delete the document from Firestore
+        const campRef = doc(db, 'football_camps', id);
+        await deleteDoc(campRef);
+
+        // Optionally, delete the image from Firebase Storage
+        const campSnapshot = await getDoc(campRef);
+        const campData = campSnapshot.data();
+        if (campData && campData.imageURL) {
+            const imageRef = ref(storage, `images/${campData.imageURL.split('/').pop()}`);
+            await deleteObject(imageRef);
+        }
+
+        displayPopup('Football Camp deleted successfully!', true);
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+
+    } catch (error) {
+        console.error('Error deleting football camp:', error);
+        displayPopup('Error deleting football camp. Please try again later.', false);
+    }
+}
 
 // Display popup message
 function displayPopup(message, isSuccess) {
