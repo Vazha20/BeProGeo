@@ -136,3 +136,4 @@ document.addEventListener('DOMContentLoaded', async function () {
     await loadPhotos();
     await loadVideos();
 });
+

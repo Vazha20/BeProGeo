@@ -1,6 +1,6 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js';
-import { getFirestore, collection, addDoc, getDocs, orderBy, query, doc, getDoc, updateDoc } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
-import { getStorage, ref, uploadBytes, getDownloadURL } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
+import { getFirestore, collection, addDoc, getDocs, orderBy, query, doc, getDoc, updateDoc, deleteDoc } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js';
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js';
 import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js';
 
 // Firebase project configuration
@@ -87,10 +87,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     await fetchPhotos();
     photoList.forEach(photo => renderPhoto(photo, photo.id));
 
-    photoContainer.addEventListener('click', function (event) {
-        if (currentUser && event.target.closest('.edit-btn')) {
-            currentPhotoId = event.target.closest('.edit-btn').getAttribute('data-id');
-            openEditForm(currentPhotoId);
+    photoContainer.addEventListener('click', async function (event) {
+        if (currentUser) {
+            const target = event.target.closest('.delete-btn');
+            if (target) {
+                const photoId = target.getAttribute('data-id');
+                const photo = photoList.find(photo => photo.id === photoId);
+
+                if (photo) {
+                    if (confirm('Are you sure you want to delete this photo?')) {
+                        await deletePhoto(photo.id, photo.imageUrl);
+                    }
+                } else {
+                    displayPopup('Photo not found.', false);
+                }
+            } else if (event.target.closest('.edit-btn')) {
+                currentPhotoId = event.target.closest('.edit-btn').getAttribute('data-id');
+                openEditForm(currentPhotoId);
+            }
         }
     });
 
@@ -136,11 +150,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
             await updateDoc(photoRef, updates);
             displayPopup('Photo updated successfully!', true);
-            editFormContainer.style.display = 'none'; // Hide the form
-            photoContainer.innerHTML = '';
-            await fetchPhotos();
-            photoList.forEach(photo => renderPhoto(photo, photo.id));
-
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
+            
         } catch (error) {
             console.error("Error updating photo:", error);
             displayPopup('Error updating photo. Please try again later.', false);
@@ -152,13 +165,47 @@ document.addEventListener('DOMContentLoaded', async function () {
     };
 });
 
+async function deletePhoto(photoId, imageUrl) {
+    try {
+        // Delete photo document from Firestore
+        await deleteDoc(doc(db, 'photo', photoId));
+
+        // Extract the image path from the URL
+        const imagePath = getImagePathFromUrl(imageUrl);
+
+        // Delete image from Firebase Storage
+        const imageRef = ref(storage, imagePath);
+        await deleteObject(imageRef);
+
+        // Refresh the photo list
+        displayPopup('Photo deleted successfully!', true);
+        setTimeout(() => {
+            location.reload();
+        }, 1000);
+
+    } catch (error) {
+        console.error("Error deleting photo:", error);
+        displayPopup('Error deleting photo. Please try again later.', false);
+    }
+}
+
+// Helper function to get image path from URL
+function getImagePathFromUrl(url) {
+    const parts = url.split('/');
+    // Join parts that are after the bucket URL prefix
+    const imagePath = parts.slice(parts.indexOf('images') + 1).join('/');
+    return imagePath;
+}
+
 function createPhotoCard(photo, id) {
     const photoCard = document.createElement('div');
     photoCard.classList.add('photo-card');
 
     let editButton = '';
+    let deleteButton = '';
     if (currentUser) {
         editButton = `<div class="edit-btn" data-id="${id}"><img width="50px" src="./src/img/edit-button.png"></div>`;
+        deleteButton = `<div class="delete-btn" data-id="${id}"><img width="50px" src="./src/img/delete.png"></div>`;
     }
 
     photoCard.innerHTML = `
@@ -168,6 +215,7 @@ function createPhotoCard(photo, id) {
             <hr class="line-yellow">
             <p class="fw-bold p-1">${photo.text}</p>
             ${editButton}
+            ${deleteButton}
         </div>
     `;
 
@@ -184,8 +232,9 @@ function displayPopup(message, isSuccess) {
 
     setTimeout(() => {
         popup.remove();
-    }, 2000);
+    }, 1000);
 }
+
 
 function loadPhoto() {
     setTimeout(function () {

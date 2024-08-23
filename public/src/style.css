@@ -128,6 +128,19 @@ li a{
 .edit-btn img {
     display: block; /* Ensure the image is not affected by any inline styles */
 }
+.delete-btn {
+    position: absolute; /* Position the button absolutely within the card */
+    bottom: 10px; /* Distance from the top edge */
+    right: 10px; /* Distance from the right edge */
+    background: none; /* Remove default background */
+    border: none; /* Remove default border */
+    cursor: pointer; /* Show pointer cursor on hover */
+    z-index: 10; /* Ensure the button is above other content */
+}
+
+.delete-btn img {
+    display: block; /* Ensure the image is not affected by any inline styles */
+}
 #playerContainer {
     position: relative;
     z-index: 1; /* Lower than the edit form */
