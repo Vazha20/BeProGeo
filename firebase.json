@@ -5,6 +5,50 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/owner",
+        "destination": "/owner.html"
+      },
+      {
+        "source": "/404",
+        "destination": "/404.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/login.html"
+      },
+      {
+        "source": "/admin",
+        "destination": "/admin.html"
+      },
+      {
+        "source": "/players",
+        "destination": "/players.html"
+      },
+      {
+        "source": "/photo",
+        "destination": "/photo.html"
+      },
+      {
+        "source": "/video",
+        "destination": "/video.html"
+      },
+      {
+        "source": "/footcamps",
+        "destination": "/footcamps.html"
+      },
+      {
+        "source": "/contact",
+        "destination": "/contact.html"
+      },
+      {
+        "source": "/**",
+        "destination": "/index.html"
+      }
     ]
   }
 }
+
+
